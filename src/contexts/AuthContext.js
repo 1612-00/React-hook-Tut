@@ -1,27 +1,14 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useReducer } from "react";
+import { authReducer } from "../reducers/AuthReducer";
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  // State
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // useEffect(() => {
-  //   alert(
-  //     isAuthenticated
-  //       ? "Login Successful"
-  //       : "You are logged out. Please login to see todos"
-  //   );
-  // }, [isAuthenticated]);
-
-  // Toggle auth
-  const toggleAuth = () => {
-    setIsAuthenticated(!isAuthenticated);
-  };
+  const [isAuthenticated, dispatch] = useReducer(authReducer, false); 
 
   const authContextData = {
     isAuthenticated,
-    toggleAuth,
+    dispatch,
   };
 
   return (
